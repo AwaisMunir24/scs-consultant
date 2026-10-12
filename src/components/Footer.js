@@ -22,7 +22,9 @@ export default function Footer() {
           <p>info@scsconsultant.example</p>
         </div>
       </div>
-      <p className="relative text-center text-sm bg-black/30 py-3">© {new Date().getFullYear()} SCS Consultant. All rights reserved.</p>
+      <p className="relative text-center text-sm bg-black/30 py-3">
+  © 2026 SCS Consultant. All rights reserved.
+</p>
     </footer>
   );
 }
