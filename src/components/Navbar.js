@@ -7,6 +7,7 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/universities", label: "UK Universities" },
   { href: "/payments", label: "Payment Solutions" },
+  { href: "/self-assessment", label: "Self Assessment" },
   { href: "/contact", label: "Contact Us" },
 ];
 
