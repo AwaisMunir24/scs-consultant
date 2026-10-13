@@ -3,21 +3,13 @@
 @theme {
   --font-display: "Trebuchet MS", Verdana, sans-serif;
 
-  /* Light pink */
-  --color-blush-50: #fff6fa;
-  --color-blush-100: #ffe6f0;
-  --color-blush-200: #ffd0e3;
-  --color-blush-300: #ffb3d1;
-  --color-blush-400: #ff8fbe;
-  --color-blush-500: #f0609f;
+  /* PRIMARY: vivid blue (kept under the name "berry" so no component needs editing) */
+  --color-berry-400: #4da3ff;
+  --color-berry-500: #2f86f6;
+  --color-berry-600: #1f6fe0;
+  --color-berry-700: #1749b8;
 
-  /* Darker pink (berry) */
-  --color-berry-400: #ee5a96;
-  --color-berry-500: #e23e83;
-  --color-berry-600: #c92a6e;
-  --color-berry-700: #a21f5a;
-
-  /* Light blue */
+  /* Light blue (soft backgrounds) */
   --color-ice-50: #f3f9ff;
   --color-ice-100: #dff0ff;
   --color-ice-200: #c4e3ff;
@@ -25,10 +17,18 @@
   --color-ice-400: #6fbbff;
   --color-ice-500: #3a9af0;
 
-  /* Deep navy-violet for text */
+  /* SECONDARY: pink (accents and soft backgrounds) */
+  --color-blush-50: #fff6fa;
+  --color-blush-100: #ffe6f0;
+  --color-blush-200: #ffd0e3;
+  --color-blush-300: #ffb3d1;
+  --color-blush-400: #ff8fbe;
+  --color-blush-500: #f0609f;
+
+  /* Deep navy for text */
   --color-ink-600: #5a5f9e;
   --color-ink-700: #3a3f7a;
-  --color-ink-900: #23264f;
+  --color-ink-900: #1c2150;
 }
 
 html {
@@ -38,9 +38,53 @@ html {
 body {
   color: var(--color-ink-900);
   -webkit-font-smoothing: antialiased;
-  background: linear-gradient(160deg, #fff6fa 0%, #f3f9ff 55%, #fff0f7 100%);
+  background: linear-gradient(160deg, #f7f9ff 0%, #eef6ff 55%, #fff3f8 100%);
   background-attachment: fixed;
 }
+
+/* Soft moving aurora behind the whole site */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40rem 40rem at 8% 8%, rgba(79, 157, 255, 0.28), transparent 60%),
+    radial-gradient(36rem 36rem at 92% 28%, rgba(255, 143, 190, 0.3), transparent 60%),
+    radial-gradient(42rem 42rem at 50% 105%, rgba(111, 187, 255, 0.25), transparent 60%);
+  animation: aurora 18s ease-in-out infinite alternate;
+}
+
+::selection {
+  background: var(--color-blush-300);
+  color: var(--color-ink-900);
+}
+
+/* Blue to pink scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-ice-50); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--color-berry-500), var(--color-blush-400));
+  border-radius: 999px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--color-blush-400);
+  outline-offset: 2px;
+}
+
+/* Sections gently rise in when a page loads */
+main > * {
+  animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+main > *:nth-child(2) { animation-delay: 0.08s; }
+main > *:nth-child(3) { animation-delay: 0.16s; }
+main > *:nth-child(4) { animation-delay: 0.24s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
@@ -55,7 +99,22 @@ body {
 }
 @keyframes twinkle {
   0%, 100% { opacity: 0.25; transform: scale(0.8) rotate(0deg); }
-  50% { opacity: 1; transform: scale(1.2) rotate(20deg); }
+  50% { opacity: 1; transform: scale(1.25) rotate(20deg); }
+}
+@keyframes aurora {
+  to { transform: translate3d(0, -3%, 0) scale(1.1); }
+}
+@keyframes rise {
+  from { opacity: 0; transform: translateY(26px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 14px 28px -12px rgba(23, 73, 184, 0.6); }
+  50% { box-shadow: 0 18px 38px -10px rgba(47, 134, 246, 0.85); }
 }
 
 @layer components {
@@ -64,29 +123,44 @@ body {
   .spin-slow { animation: spin-slow 40s linear infinite; }
   .twinkle { animation: twinkle 3s ease-in-out infinite; }
 
+  /* Headline gradient: blue flowing into pink */
   .grad-text {
-    background-image: linear-gradient(90deg, var(--color-berry-500), var(--color-ice-500));
+    background-image: linear-gradient(
+      90deg,
+      var(--color-berry-600),
+      var(--color-blush-500),
+      var(--color-berry-500),
+      var(--color-blush-500),
+      var(--color-berry-600)
+    );
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    animation: shift 6s linear infinite;
   }
+
+  /* Soft badge background: light blue to light pink */
   .grad-bg {
-    background-image: linear-gradient(90deg, var(--color-blush-300), var(--color-ice-300));
+    background-image: linear-gradient(90deg, var(--color-ice-300), var(--color-blush-300));
   }
+
+  /* Primary blue gradient (buttons, icons, active pills) */
   .grad-berry {
-    background-image: linear-gradient(135deg, var(--color-berry-400), var(--color-berry-700));
+    background-image: linear-gradient(135deg, var(--color-berry-500), var(--color-berry-700));
   }
+
   .bg-soft {
-    background-image: linear-gradient(135deg, var(--color-blush-100), #ffffff 50%, var(--color-ice-100));
+    background-image: linear-gradient(135deg, var(--color-ice-100), #ffffff 50%, var(--color-blush-100));
   }
   .bg-hero-1 {
-    background-image: linear-gradient(135deg, var(--color-blush-200), var(--color-blush-100) 50%, var(--color-ice-100));
+    background-image: linear-gradient(135deg, var(--color-ice-300), var(--color-ice-100) 55%, var(--color-blush-200));
   }
   .bg-hero-2 {
-    background-image: linear-gradient(135deg, var(--color-ice-200), var(--color-ice-100) 50%, var(--color-blush-100));
+    background-image: linear-gradient(135deg, var(--color-blush-200), #ffffff 50%, var(--color-ice-300));
   }
   .bg-hero-3 {
-    background-image: linear-gradient(135deg, var(--color-blush-100), var(--color-ice-100) 50%, var(--color-blush-200));
+    background-image: linear-gradient(135deg, var(--color-blush-100), var(--color-ice-200) 50%, var(--color-ice-300));
   }
 
   .glass {
@@ -96,32 +170,45 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.9);
   }
   .soft {
-    box-shadow: 0 18px 40px -18px rgba(90, 95, 158, 0.35);
+    box-shadow: 0 18px 40px -18px rgba(31, 111, 224, 0.35);
   }
   .soft-pink {
-    box-shadow: 0 18px 40px -16px rgba(201, 42, 110, 0.4);
+    box-shadow: 0 18px 44px -16px rgba(47, 134, 246, 0.5);
   }
 
   .btn-berry {
     position: relative;
     overflow: hidden;
     color: #fff;
-    background-image: linear-gradient(135deg, var(--color-berry-400), var(--color-berry-700));
-    box-shadow: 0 14px 28px -12px rgba(162, 31, 90, 0.6);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    background-image: linear-gradient(135deg, var(--color-berry-500), var(--color-berry-700));
+    animation: glow 3s ease-in-out infinite;
+    transition: transform 0.25s ease;
   }
   .btn-berry:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) scale(1.03);
   }
   .btn-berry::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
     transform: translateX(-120%);
   }
   .btn-berry:hover::after {
     transform: translateX(120%);
     transition: transform 0.7s ease;
+  }
+
+  .dots {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.6) 2px, transparent 2px);
+    background-size: 22px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
