@@ -25,7 +25,7 @@ export default function Footer() {
         </div>
         <div>
           <h4 className="font-extrabold text-blush-300 mb-3">Get in touch</h4>
-          <p className="text-white/80">Lahore, Pakistan</p>
+          <p className="text-white/80">Kohinoor Faisalabad, Pakistan</p>
           <p className="text-white/80">info@scsconsultant.example</p>
           <Link href="/contact" className="btn-berry inline-block mt-4 px-6 py-2.5 rounded-full font-bold">
             Free Counselling →
