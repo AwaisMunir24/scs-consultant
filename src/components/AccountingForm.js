@@ -1,117 +1,309 @@
-"use client";
-import { useState } from "react";
+import WhatsAppButton from "../components/WhatsAppButton";
 
-// Set this to your form handler (API route, Formspree, etc.).
-// While empty, the form validates and shows the success message only.
-const FORM_ENDPOINT = "";
+export const metadata = {
+  title: "Business Accounting & Bookkeeping | SCS Consultant",
+  description:
+    "Accounting and bookkeeping support tailored to your business. Keep your financial records organised with Saras Consultancy & Services.",
+};
 
-const field =
-  "w-full rounded-2xl bg-white px-4 py-3 text-ink-900 placeholder:text-ink-600/60 border-2 border-ice-200 focus:border-berry-500 focus:outline-none transition";
-const label = "block text-sm font-bold text-ink-700 mb-1.5";
+const MESSAGE =
+  "Hello SCS Consultant, I would like a quotation for Business Accounting & Bookkeeping support.";
 
-const services = [
-  "Bookkeeping",
-  "Accounts preparation",
-  "Income and expense records",
-  "Business expense organisation",
-  "Invoice / payment records",
-  "General accounting support",
-  "Tax return information preparation",
-  "Other",
+const highlights = [
+  {
+    icon: "▤",
+    title: "Bookkeeping",
+    text: "Day-to-day records kept accurate and up to date.",
+  },
+  {
+    icon: "▦",
+    title: "Accounts Preparation",
+    text: "Your figures organised into clear accounts.",
+  },
+  {
+    icon: "£",
+    title: "Income & Expenses",
+    text: "Know what comes in, what goes out, and why.",
+  },
+  {
+    icon: "✎",
+    title: "Tax Return Information",
+    text: "Details gathered and ready for your tax return.",
+  },
 ];
 
-function Field({ name, text, required, type = "text", placeholder, children }) {
+const services = [
+  {
+    title: "Bookkeeping",
+    text: "Regular, accurate records of everything your business does.",
+  },
+  {
+    title: "Accounts Preparation",
+    text: "Your financial information put together into proper accounts.",
+  },
+  {
+    title: "Income and Expense Records",
+    text: "Clear records of money coming in and going out.",
+  },
+  {
+    title: "Business Expense Organisation",
+    text: "Receipts and costs sorted so nothing gets lost.",
+  },
+  {
+    title: "Invoice and Payment Records",
+    text: "Track what you have billed and what has been paid.",
+  },
+  {
+    title: "General Accounting Support",
+    text: "Practical help with day-to-day accounting questions.",
+  },
+];
+
+const steps = [
+  {
+    title: "Message Us on WhatsApp",
+    text: "Tell us about your business and the accounting support you need.",
+  },
+  {
+    title: "Discuss Your Requirements",
+    text: "We will discuss your business type, size and bookkeeping requirements.",
+  },
+  {
+    title: "Receive Your Quotation",
+    text: "Get a quotation tailored to your business requirements.",
+  },
+];
+
+export default function Accounting() {
   return (
-    <div>
-      <label htmlFor={name} className={label}>
-        {text} {required && <span className="text-blush-500">*</span>}
-      </label>
-      {children || (
-        <input id={name} name={name} type={type} required={required} placeholder={placeholder} className={field} />
-      )}
-    </div>
-  );
-}
+    <main className="w-full min-w-0">
+      {/* Hero */}
+      <section className="w-full px-4 pt-10 md:pt-16">
+        <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-hero-3 p-8 md:p-16 soft">
+          <div className="dots absolute inset-0 opacity-70" />
 
-export default function AccountingForm() {
-  const [status, setStatus] = useState("idle"); // idle | sending | done | error
+          <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full bg-blush-300/40 blur-3xl" />
 
-  async function onSubmit(e) {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    const payload = Object.fromEntries(data.entries());
-    payload.servicesRequired = data.getAll("servicesRequired");
-    setStatus("sending");
-    try {
-      if (FORM_ENDPOINT) {
-        const res = await fetch(FORM_ENDPOINT, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ subject: "Business Accounting Enquiry", ...payload }),
-        });
-        if (!res.ok) throw new Error("Request failed");
-      }
-      form.reset();
-      setStatus("done");
-    } catch {
-      setStatus("error");
-    }
-  }
+          <span className="twinkle absolute left-[5%] top-[10%] text-2xl text-berry-600">
+            ✦
+          </span>
 
-  if (status === "done") {
-    return (
-      <div className="glass soft rounded-3xl p-10 text-center">
-        <div className="mx-auto w-16 h-16 rounded-full grad-berry text-white text-3xl font-bold flex items-center justify-center">✓</div>
-        <h3 className="mt-5 text-2xl font-extrabold">Thank you, we have your enquiry</h3>
-        <p className="mt-2 text-ink-600">Our team will be in touch soon to talk about your accounting needs.</p>
-        <button onClick={() => setStatus("idle")} className="btn-berry mt-6 px-7 py-3 rounded-full font-extrabold">
-          Send another enquiry
-        </button>
-      </div>
-    );
-  }
+          <div className="relative w-full">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-white/80 text-berry-600 font-bold text-sm">
+              📊 Business Accounting &amp; Bookkeeping
+            </span>
 
-  return (
-    <form onSubmit={onSubmit} className="glass soft rounded-3xl p-5 md:p-8 grid gap-5">
-      <div className="grid sm:grid-cols-2 gap-4">
-        <Field name="businessName" text="Business name" required />
-        <Field name="contactName" text="Your name" required />
-        <Field name="email" text="Email" type="email" required />
-        <Field name="telephone" text="Telephone" type="tel" required />
-      </div>
+            <h1 className="mt-5 text-4xl md:text-6xl font-extrabold leading-tight">
+              Keep your business{" "}
+              <span className="grad-text">finances organised</span>
+            </h1>
 
-      <Field name="businessType" text="Business type" placeholder="e.g. Limited company, sole trader, shop" />
+            <p className="mt-5 text-lg text-ink-700 max-w-3xl">
+              Need help keeping your business financial records organised?
+              Talk to us about the accounting or bookkeeping support your
+              business requires. We provide practical support to help you keep
+              your financial information clear, organised and up to date.
+            </p>
 
-      <div>
-        <span className={label}>Services required <span className="font-semibold text-ink-600">(select all that apply)</span></span>
-        <div className="grid sm:grid-cols-2 gap-2">
-          {services.map((s) => (
-            <label key={s} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 border-2 border-ice-200 cursor-pointer font-semibold text-ink-700 has-[:checked]:border-berry-500 has-[:checked]:bg-ice-50 transition">
-              <input type="checkbox" name="servicesRequired" value={s} className="w-5 h-5 accent-berry-600" />
-              {s}
-            </label>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <WhatsAppButton message={MESSAGE}>
+                Get a Quote on WhatsApp
+              </WhatsAppButton>
+            </div>
+
+            {/* Business Records Illustration */}
+            <div className="mt-12 max-w-md">
+              <div className="float relative w-full max-w-sm rounded-3xl bg-white p-6 soft-pink">
+                <div className="flex items-center justify-between">
+                  <p className="font-extrabold">Business Records</p>
+
+                  <span className="w-9 h-9 rounded-xl grad-berry text-white font-extrabold flex items-center justify-center">
+                    £
+                  </span>
+                </div>
+
+                <div className="mt-6 flex items-end gap-3 h-24">
+                  {[40, 65, 50, 85, 70, 100].map((h, n) => (
+                    <div
+                      key={n}
+                      className="flex-1 rounded-t-lg grad-berry"
+                      style={{
+                        height: `${h}%`,
+                        opacity: 0.55 + n * 0.09,
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <div className="mt-4 grid gap-2 text-sm font-bold text-ink-700">
+                  <div className="flex justify-between">
+                    <span>Income</span>
+                    <span className="text-berry-600">Recorded</span>
+                  </div>
+
+                  <div className="flex justify-between">
+                    <span>Expenses</span>
+                    <span className="text-berry-600">Organised</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Highlights */}
+      <section className="w-full px-4 py-16">
+        <h2 className="text-3xl md:text-5xl font-extrabold text-center">
+          Support that <span className="grad-text">fits your business</span>
+        </h2>
+
+        <p className="text-center text-ink-600 mt-3">
+          Accounting and bookkeeping tailored to the way you work.
+        </p>
+
+        <div className="mt-12 grid grid-cols-1 gap-6">
+          {highlights.map((s) => (
+            <div
+              key={s.title}
+              className="group relative w-full overflow-hidden rounded-[2rem] bg-white p-7 soft transition duration-300 hover:-translate-y-1"
+            >
+              <div className="relative w-14 h-14 rounded-2xl grad-berry text-white text-2xl flex items-center justify-center rotate-3 group-hover:rotate-12 transition">
+                {s.icon}
+              </div>
+
+              <h3 className="relative mt-5 text-xl font-extrabold">
+                {s.title}
+              </h3>
+
+              <p className="relative mt-2 text-ink-600">{s.text}</p>
+
+              <div className="relative mt-5 h-1.5 w-12 rounded-full grad-berry transition-all duration-300 group-hover:w-24" />
+            </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      <Field name="message" text="Additional information">
-        <textarea id="message" name="message" rows={4} className={field} placeholder="Anything else we should know about your business?" />
-      </Field>
+      {/* What We Offer */}
+      <section className="w-full px-4">
+        <div className="relative w-full overflow-hidden rounded-[2.5rem] bg-soft p-8 md:p-14 soft">
+          <div className="absolute -left-16 -top-16 w-64 h-64 rounded-full bg-berry-400/20 blur-3xl" />
 
-      {status === "error" && (
-        <p role="alert" className="rounded-2xl bg-blush-100 text-ink-900 font-semibold px-4 py-3">
-          Something went wrong sending your enquiry. Please try again, or use the Contact page.
+          <div className="absolute -right-16 -bottom-16 w-72 h-72 rounded-full bg-blush-200/50 blur-3xl" />
+
+          <div className="relative w-full">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blush-100 text-berry-600 font-bold text-sm">
+              ✦ What We Offer
+            </span>
+
+            <h2 className="mt-4 text-3xl md:text-5xl font-extrabold leading-tight">
+              Services for <span className="grad-text">your records</span>
+            </h2>
+
+            <p className="mt-4 text-ink-700 text-lg">
+              We offer accounting and bookkeeping support to help you organise
+              business records, track transactions and maintain clear financial
+              information.
+            </p>
+          </div>
+
+          <div className="relative mt-10 grid grid-cols-1 gap-4">
+            {services.map((service) => (
+              <div
+                key={service.title}
+                className="w-full glass rounded-3xl p-5 soft"
+              >
+                <span className="w-9 h-9 rounded-full grad-berry text-white flex items-center justify-center text-sm font-bold">
+                  ✓
+                </span>
+
+                <h3 className="mt-3 font-extrabold text-lg">
+                  {service.title}
+                </h3>
+
+                <p className="mt-2 text-ink-600">{service.text}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative mt-8">
+            <WhatsAppButton message={MESSAGE}>
+              Get a Quote on WhatsApp
+            </WhatsAppButton>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="w-full px-4 py-20">
+        <h2 className="text-3xl md:text-5xl font-extrabold">
+          Get a quote in <span className="grad-text">3 easy steps</span>
+        </h2>
+
+        <p className="mt-4 text-lg text-ink-600">
+          Getting started is straightforward. Contact us directly to discuss
+          the accounting and bookkeeping support your business needs.
         </p>
-      )}
 
-      <button
-        type="submit"
-        disabled={status === "sending"}
-        className="btn-berry w-full sm:w-auto sm:justify-self-start px-10 py-4 rounded-full font-extrabold text-lg disabled:opacity-60"
-      >
-        {status === "sending" ? "Sending…" : "Request Accounting Support"}
-      </button>
-    </form>
+        <ol className="relative mt-10 grid grid-cols-1 gap-10">
+          {steps.map((step, n) => (
+            <li key={step.title} className="relative w-full">
+              <div className="flex items-start gap-5">
+                <div className="shrink-0 w-14 h-14 rounded-full grad-berry text-white font-extrabold text-xl flex items-center justify-center ring-4 ring-white shadow-lg">
+                  {n + 1}
+                </div>
+
+                <div className="flex-1">
+                  <h3 className="font-extrabold text-lg">{step.title}</h3>
+
+                  <p className="mt-2 text-ink-600">{step.text}</p>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        <div className="mt-10">
+          <WhatsAppButton message={MESSAGE}>
+            Discuss Your Requirements on WhatsApp
+          </WhatsAppButton>
+        </div>
+      </section>
+
+      {/* Final Call to Action */}
+      <section className="w-full px-4 pb-8">
+        <div className="relative w-full overflow-hidden rounded-[2.5rem] grad-berry p-8 md:p-14 text-center text-white soft-pink">
+          <div className="absolute -left-10 -bottom-10 w-48 h-48 rounded-full bg-white/15" />
+
+          <div className="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-ice-300/30" />
+
+          <span className="twinkle absolute left-[12%] top-[20%] text-2xl">
+            ✦
+          </span>
+
+          <span
+            className="twinkle absolute right-[14%] bottom-[22%] text-3xl"
+            style={{ animationDelay: "1.5s" }}
+          >
+            ✦
+          </span>
+
+          <h2 className="relative text-3xl md:text-5xl font-extrabold">
+            Keep your business finances organised.
+          </h2>
+
+          <p className="relative mt-3 text-lg text-white/90">
+            Talk to us about accounting and bookkeeping support tailored to
+            your business.
+          </p>
+
+          <div className="relative mt-7">
+            <WhatsAppButton message={MESSAGE} variant="light">
+              Request a Quote on WhatsApp
+            </WhatsAppButton>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }
