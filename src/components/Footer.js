@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
       </div>
       <p className="relative text-center text-sm bg-black/25 py-4 text-white/60">
-        © {new Date().getFullYear()} SCS Consultant. All rights reserved.
+        © 2026 SCS Consultant. All rights reserved.
       </p>
     </footer>
   );
