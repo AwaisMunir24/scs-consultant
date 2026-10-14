@@ -4,7 +4,7 @@ import { useState } from "react";
 const info = [
   ["⌂", "Visit us", "Kohinoor Faisalabad, Pakistan"],
   ["☎", "Call us", "+44 7482020223"],
-  ["✉", "Email", "saraconsultancy@gmail.com"],
+  ["✉", "Email", "saraconsultancy215@gmail.com"],
   ["◷", "Hours", "Mon – Sat, 9am – 6pm"],
 ];
 
