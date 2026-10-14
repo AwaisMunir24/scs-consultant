@@ -1,6 +1,12 @@
 import UniList from "../../components/UniList";
+import { countries } from "../../components/universitiesData";
 
-export const metadata = { title: "UK Universities | SCS Consultant" };
+export const metadata = {
+  title: "Universities by Country | SCS Consultant",
+  description: "Explore partner universities country by country, with intakes, and let SCS Consultant guide your application and visa.",
+};
+
+const total = countries.reduce((n, c) => n + c.unis.length, 0);
 
 export default function Universities() {
   return (
@@ -11,13 +17,17 @@ export default function Universities() {
         <div className="absolute left-16 top-10 w-40 h-40 rounded-full bg-berry-400/25 blur-3xl" />
         <span className="twinkle absolute right-[20%] bottom-[20%] text-3xl text-berry-500">✦</span>
         <div className="relative">
-          <span className="inline-block px-4 py-1.5 rounded-full glass font-bold text-sm text-berry-600">✦ Study in the UK</span>
+          <span className="inline-block px-4 py-1.5 rounded-full glass font-bold text-sm text-berry-600">✦ Study Abroad</span>
           <h1 className="mt-4 text-4xl md:text-6xl font-extrabold">
-            Universities in the <span className="grad-text">UK</span>
+            Universities by <span className="grad-text">Country</span>
           </h1>
           <p className="mt-5 max-w-2xl mx-auto text-lg text-ink-700">
-            Pick a city, explore popular universities, and let us handle the shortlisting, applications and visa.
+            Choose a country, explore partner universities and their intakes, and let us handle the shortlisting, applications and visa.
           </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <span className="glass px-5 py-2 rounded-full font-extrabold text-ink-700">{countries.length} countries</span>
+            <span className="glass px-5 py-2 rounded-full font-extrabold text-ink-700">{total} universities</span>
+          </div>
         </div>
       </section>
       <UniList />

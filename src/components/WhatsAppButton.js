@@ -2,7 +2,7 @@ import Link from "next/link";
 
 // Change this ONE number and every WhatsApp button on the site updates.
 // Use the international format with no +, spaces or dashes (e.g. 447123456789).
-export const WHATSAPP_NUMBER = "447000000000";
+export const WHATSAPP_NUMBER = "447482020223";
 
 export default function WhatsAppButton({ message, children, className = "", variant = "primary" }) {
   const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;

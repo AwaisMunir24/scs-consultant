@@ -19,14 +19,14 @@ export default function Footer() {
           <h4 className="font-extrabold text-blush-300 mb-3">Explore</h4>
           <ul className="space-y-2 text-white/80">
             <li><Link href="/" className="hover:text-blush-300">Home</Link></li>
-            <li><Link href="/universities" className="hover:text-blush-300">UK Universities</Link></li>
+            <li><Link href="/universities" className="hover:text-blush-300">Universities</Link></li>
             <li><Link href="/contact" className="hover:text-blush-300">Contact Us</Link></li>
           </ul>
         </div>
         <div>
           <h4 className="font-extrabold text-blush-300 mb-3">Get in touch</h4>
           <p className="text-white/80">Kohinoor Faisalabad, Pakistan</p>
-          <p className="text-white/80">info@scsconsultant.example</p>
+          <p className="text-white/80">saraconsultancy@gmail.com</p>
           <Link href="/contact" className="btn-berry inline-block mt-4 px-6 py-2.5 rounded-full font-bold">
             Free Counselling →
           </Link>

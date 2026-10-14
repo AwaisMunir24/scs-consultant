@@ -2,9 +2,9 @@
 import { useState } from "react";
 
 const info = [
-  ["⌂", "Visit us", "Lahore, Pakistan"],
-  ["☎", "Call us", "+92 000 0000000"],
-  ["✉", "Email", "info@scsconsultant.example"],
+  ["⌂", "Visit us", "Kohinoor Faisalabad, Pakistan"],
+  ["☎", "Call us", "+44 7482020223"],
+  ["✉", "Email", "saraconsultancy@gmail.com"],
   ["◷", "Hours", "Mon – Sat, 9am – 6pm"],
 ];
 
